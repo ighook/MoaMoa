@@ -15,4 +15,5 @@
         android:textSize="40sp"
         android:textColor="@color/colorWhite"
         android:fontFamily="@font/loading"/>
+
 </LinearLayout>

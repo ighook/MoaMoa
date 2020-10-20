@@ -15,9 +15,16 @@
         <include
             layout="@layout/main_toolbar"/>
         <TextView
+            android:id="@+id/id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="메인 화면"
+            android:textColor="@color/colorBlack"
+            android:textSize="50sp"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:textColor="@color/colorBlack"
             android:textSize="50sp"
             android:gravity="center"/>

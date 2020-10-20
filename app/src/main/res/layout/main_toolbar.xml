@@ -5,22 +5,29 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="12dp"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:background="#B2EBF4">
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="5dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:onClick="ClickMenu"
         android:src="@drawable/ic_menu"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="모아모아"
+        android:layout_weight="8"
+        android:text="@string/app_name"
         android:gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#636363"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
 
 </LinearLayout>
