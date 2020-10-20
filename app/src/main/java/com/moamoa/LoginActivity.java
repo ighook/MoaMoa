@@ -22,7 +22,7 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
     private EditText input_id, input_pw;
     public Button btn_login, btn_register;
-    // ㅋㅋ ㅁㄴㅇㅁㄴㅇ
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
