@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:onClick="ClickMenu"
-        android:src="@drawable/ic_menu"/>
+        android:src="@drawable/ic_menu"
+        android:contentDescription="@null"/>
 
     <TextView
         android:layout_width="0dp"
