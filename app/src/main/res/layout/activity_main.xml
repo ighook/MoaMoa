@@ -42,11 +42,13 @@
             android:layout_height="300dp"
             android:orientation="horizontal">
             <Button
+                android:id="@+id/btn_cafe"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="카페"/>
             <Button
+                android:id="@+id/btn_restaurant"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
