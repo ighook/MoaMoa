@@ -65,7 +65,7 @@ public class RegisterPersonalActivity extends AppCompatActivity {
                 if(!age.isEmpty()) userAge = Integer.parseInt(age);
 
                 //Toast.makeText(getApplicationContext(), userID + " " + userPassword, Toast.LENGTH_SHORT).show();
-                if(!EmptyCheck(userID, userPassword, userPasswordCheck, userName, age)) {
+                /*if(!EmptyCheck(userID, userPassword, userPasswordCheck, userName, age)) {
                     Response.Listener<String> responseListener = new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -91,10 +91,10 @@ public class RegisterPersonalActivity extends AppCompatActivity {
                             }
                         }
                     };
-                    RegisterRequest registerRequest = new RegisterRequest(userID, userPassword, userName, userAge, responseListener);
+                    RegisterRequest registerRequest = new RegisterRequest(userID, userPassword, userName, userNicName, responseListener);
                     RequestQueue queue = Volley.newRequestQueue(RegisterPersonalActivity.this);
                     queue.add(registerRequest);
-                }
+                }*/
 
                 /*if(!userPassword.equals(userPasswordCheck)) {
                     //Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
