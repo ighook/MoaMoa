@@ -14,18 +14,18 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    ImageButton btn_login;
-    Button btn_restaurant;
+    ImageButton btn_login, btn_search, btn_restaurant, btn_cafe;
     DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //s
         btn_login = findViewById(R.id.btn_login);
+        btn_search = findViewById(R.id.btn_search);
         btn_restaurant = findViewById(R.id.btn_restaurant);
-        drawerLayout = findViewById(R.id.drawer_layout);
+        btn_cafe = findViewById(R.id.btn_cafe);
 
         // 로그인 버튼
         btn_login.setOnClickListener(new View.OnClickListener() {

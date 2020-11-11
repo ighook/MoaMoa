@@ -14,11 +14,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute">
-        <activity android:name=".ReviewListActivity"></activity>
+        <activity android:name=".ReviewListActivity"/>
         <activity android:name=".RegisterActivity" />
         <activity
             android:name=".SplashActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
