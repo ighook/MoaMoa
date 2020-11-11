@@ -86,26 +86,5 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        AlertDialog.Builder aDialog = new AlertDialog.Builder(LoginActivity.this);
-        aDialog.setTitle("알림"); //타이틀바 제목
-        aDialog.setMessage("어플을 종료하시겠습니까?");
 
-        aDialog.setPositiveButton("예", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-                System.exit(0);
-                android.os.Process.killProcess(android.os.Process.myPid());
-            }
-        });
-
-        aDialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-
-        AlertDialog alertDialog = aDialog.create();
-        alertDialog.show();//보여줌!
-    }
 }

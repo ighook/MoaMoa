@@ -22,4 +22,7 @@
 
     <string name="error_name">이름을 입력해주세요</string>
     <string name="error_nicName">닉네임을 입력해주세요</string>
+
+    <string name="restaurant">식당</string>
+    <string name="cafe">카페</string>
 </resources>

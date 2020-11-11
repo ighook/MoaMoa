@@ -1,16 +1,21 @@
 package com.moamoa;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    TextView ID, PW;
+    ImageButton btn_login;
+    Button btn_restaurant;
     DrawerLayout drawerLayout;
 
     @Override
@@ -18,17 +23,50 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        btn_login = findViewById(R.id.btn_login);
+        btn_restaurant = findViewById(R.id.btn_restaurant);
         drawerLayout = findViewById(R.id.drawer_layout);
 
-        ID = findViewById(R.id.id);
-        PW = findViewById(R.id.password);
+        // 로그인 버튼
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
-        Intent intent = getIntent();
-        String userID = intent.getStringExtra("userID");
-        String userPW = intent.getStringExtra("userPW");
+        // 식당 버튼
+        btn_restaurant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ReviewListActivity.class);
+                startActivity(intent);
+            }
+        });
 
-        ID.setText(userID);
-        PW.setText(userPW);
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder aDialog = new AlertDialog.Builder(MainActivity.this);
+        aDialog.setMessage("종료하시겠습니까?");
+
+        aDialog.setPositiveButton("예", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+                System.exit(0);
+                android.os.Process.killProcess(android.os.Process.myPid());
+            }
+        });
+
+        aDialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        AlertDialog alertDialog = aDialog.create();
+        alertDialog.show();
     }
 
     public void ClickMenu(View view) {

@@ -107,7 +107,6 @@
         android:textSize="14sp"
         android:textColor="@color/input_register"
         android:textColorHint="@color/input_register_hint"
-        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         android:autofillHints="@null"
         tools:ignore="SmallSp" />
 
@@ -130,13 +129,21 @@
         android:textSize="14sp"
         android:textColor="@color/input_register"
         android:textColorHint="@color/input_register_hint"
-        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         android:autofillHints="@null"
         tools:ignore="SmallSp" />
+
     <TextView
         android:id="@+id/alert_nicName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:textSize="0sp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/btn_login"
+        android:text="@string/btn_register"
+        android:textColor="@color/white"/>
 </LinearLayout>
