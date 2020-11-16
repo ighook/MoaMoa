@@ -2,23 +2,33 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.moamoa">
-
-    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- internet -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- camera, gallery -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:ignore="AllowBackup,UnusedAttribute">
-        <activity android:name=".ReviewListActivity"/>
+        tools:ignore="UnusedAttribute">
+        <activity android:name=".NoticeActivity"></activity>
+        <activity android:name=".NoticeListActivity" />
+        <activity android:name=".RestaurantInfo" />
+        <activity android:name=".CafeListActivity" />
+        <activity android:name=".RestaurantListActivity" />
+        <activity android:name=".ReviewShow" />
+        <activity android:name=".ReviewWriteActivity" />
+        <activity android:name=".ReviewListActivity" />
         <activity android:name=".RegisterActivity" />
         <activity
             android:name=".SplashActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +37,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
 
 </manifest>

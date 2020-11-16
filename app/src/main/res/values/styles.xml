@@ -7,4 +7,7 @@
         <item name="colorAccent">@color/colorBlack</item>
     </style>
 
+    <style name="RatingBar" parent="Widget.AppCompat.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_ratingbar</item>
+    </style>
 </resources>

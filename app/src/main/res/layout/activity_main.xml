@@ -1,72 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="vertical"
-    android:id="@+id/drawer_layout">
-    <LinearLayout
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/action_bar"
         android:layout_width="match_parent"
-        android:layout_height="70dp">
-        <TableLayout
+        android:layout_height="60dp"
+        android:padding="5dp"
+        android:background="@color/bg_main"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_login"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/login"
+            android:scaleType="fitCenter"
+            android:layout_alignParentLeft="true"
+            tools:ignore="ContentDescription,RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:stretchColumns="1">
-            <TableRow>
-                <ImageButton
-                    android:id="@+id/btn_login"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/login"
-                    android:scaleType="fitCenter"
-                    android:padding="5dp"
-                    android:background="@color/white"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/app_name"
-                    android:textSize="20sp"/>
-                <ImageButton
-                    android:id="@+id/btn_search"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/search"
-                    android:scaleType="fitCenter"
-                    android:padding="5dp"
-                    android:background="@color/white"/>
-            </TableRow>
-        </TableLayout>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/btn_search"
+            android:layout_toRightOf="@id/btn_login"
+            android:fontFamily="@font/loading"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/app_name"
+            android:textColor="@color/colorWhite"
+            android:textSize="40sp"
+            tools:ignore="RtlHardcoded" />
 
+        <ImageButton
+            android:id="@+id/btn_search"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/search"
+            android:scaleType="fitCenter"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:layout_alignParentRight="true"
+            tools:ignore="ContentDescription,RtlHardcoded" />
+    </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/button"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/notice"
+        android:layout_below="@+id/action_bar"
+        android:orientation="vertical"
+        android:padding="10dp">
+
         <ImageButton
             android:id="@+id/btn_cafe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@color/white"
-            android:src="@drawable/cafe"
-            android:scaleType="fitCenter"
-            android:contentDescription="@null"/>
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/cafe_btn_image"
+            android:scaleType="center"
+            android:text="@string/cafe" />
+
         <ImageButton
             android:id="@+id/btn_restaurant"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:scaleType="fitCenter"
-            android:background="@color/white"
-            android:src="@drawable/restaurant"
-            android:contentDescription="@null"/>
+            android:background="@drawable/restaurant_btn_image"
+            android:scaleType="centerInside"
+            android:text="@string/restaurant" />
     </LinearLayout>
 
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/notice"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:padding="10dp"
+        android:layout_above="@+id/board"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/notice_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@id/detail"
+                android:text="◈ 공지사항"
+                android:textColor="@color/colorBlack"
+                android:layout_toStartOf="@id/detail" />
+            <TextView
+                android:id="@+id/detail"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:text="더보기"
+                android:textColor="@color/colorBlack"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/board"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="◈자유게시판"
+            android:textColor="@color/colorBlack"/>
+    </LinearLayout>
+
+</RelativeLayout>

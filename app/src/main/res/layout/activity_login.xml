@@ -15,12 +15,17 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="@string/id"
+            android:textColor="@color/colorBlack"/>
         <EditText
             android:id="@+id/et_id"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-
+            android:layout_marginBottom="15dp"
             android:background="@drawable/border"
             android:hint="@string/id"
             android:inputType="textCapWords"
@@ -28,6 +33,12 @@
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="@string/pw"
+            android:textColor="@color/colorBlack"/>
         <EditText
             android:id="@+id/et_pw"
             android:layout_width="fill_parent"
@@ -35,7 +46,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/border"
             android:hint="@string/pw"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
             android:padding="10dp"
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint"

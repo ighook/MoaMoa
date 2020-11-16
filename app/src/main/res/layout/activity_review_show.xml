@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0047ab">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="리뷰 상세"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="80dp"
+            android:gravity="left">
+
+        </TextView>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/line_show_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_show"
+        android:layout_marginTop="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="가게이름" >
+
+
+        </TextView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/line_show_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line_show_1"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/s_tv_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="맛"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textColor="#454C53">
+
+        </TextView>
+
+        <RatingBar
+            android:id="@+id/s_tv_3_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@id/s_tv_3">
+
+        </RatingBar>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/line_show_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/line_show_2"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/s_tv_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="가격"
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:textColor="#454C53">
+
+        </TextView>
+
+        <RatingBar
+            android:id="@+id/s_tv_4_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@id/s_tv_4" >
+
+        </RatingBar>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/line_show_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/line_show_3"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/s_tv_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="분위기"
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:textColor="#454C53">
+
+        </TextView>
+
+        <RatingBar
+            android:id="@+id/s_tv_5_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@id/s_tv_5" >
+
+        </RatingBar>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/line_show_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/line_show_4"
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:id="@+id/s_tv_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="서비스"
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:textColor="#454C53">
+
+        </TextView>
+
+        <RatingBar
+            android:id="@+id/s_tv_6_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@id/s_tv_6" >
+
+        </RatingBar>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_show_1"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_below="@id/line_show_5" >
+
+        <TextView
+            android:id="@+id/s_tv_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="한줄평"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:textColor="#454C53">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/s_et_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/s_tv_7"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="15dp">
+
+        </EditText>
+
+    </RelativeLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relative_show_1"
+        android:rowCount="2"
+        android:columnCount="2">
+
+        <ImageView
+            android:id="@+id/image_show_1"
+            android:layout_width="200dp"
+            android:layout_height="120dp">
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/image_show_2"
+            android:layout_width="200dp"
+            android:layout_height="120dp">
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/image_show_3"
+            android:layout_width="200dp"
+            android:layout_height="120dp">
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/image_show_4"
+            android:layout_width="200dp"
+            android:layout_height="120dp">
+        </ImageView>
+
+    </GridLayout>
+
+</RelativeLayout>

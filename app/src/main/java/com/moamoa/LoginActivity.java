@@ -61,15 +61,21 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            int success = jsonObject.getInt("success");
-                            String stats = String.valueOf(success);
-                            Toast.makeText(getApplicationContext(), stats, Toast.LENGTH_SHORT).show();
-                            if(success == 1) {
-                                //Toast.makeText(getApplicationContext(), "로그인에 성공하였습니다", Toast.LENGTH_SHORT).show();
+                            int stats = jsonObject.getInt("stats");
+                            String nicName = jsonObject.getString("nicName");
+                            //String s = String.valueOf(stats);
+                            //Toast.makeText(getApplicationContext(), nicName, Toast.LENGTH_SHORT).show();
+                            if(stats == 1) {
+                                Toast.makeText(getApplicationContext(), "로그인에 성공하였습니다", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("login", true);
+                                intent.putExtra("nicName", nicName);
                                 startActivity(intent);
-                            } else {
-                                //Toast.makeText(getApplicationContext(), "로그인에 실패하였습니다", Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else if(stats == 2) {
+                                Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
+                            } else if(stats == 3) {
+                                Toast.makeText(getApplicationContext(), "존재하지 않는 회원입니다", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

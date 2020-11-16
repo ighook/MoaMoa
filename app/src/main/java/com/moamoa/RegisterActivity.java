@@ -45,8 +45,8 @@ public class RegisterActivity extends AppCompatActivity {
         alert_pw_check = findViewById(R.id.alert_pw_check);
         alert_nicName = findViewById(R.id.alert_nicName);
 
-        //textChanged();
-        //passwordEqualCheck();
+        textChanged();
+        passwordEqualCheck();
 
         // 가입 버튼
         btn_register = (Button) findViewById(R.id.btn_register);
@@ -100,17 +100,17 @@ public class RegisterActivity extends AppCompatActivity {
                             //Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
 
                             if (state == 1) { // 회원 등록 성공
-                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                Toast.makeText(getApplicationContext(), "가입이 완료되었습니다", Toast.LENGTH_SHORT).show();
+                                /*AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                                 builder.setMessage("가입 성공")
                                         .setCancelable(false)
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
-                                                //do things
+
                                             }
                                         });
                                 AlertDialog alert = builder.create();
-                                alert.show();
-
+                                alert.show();*/
                                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 finish();
@@ -140,6 +140,8 @@ public class RegisterActivity extends AppCompatActivity {
                                 alert.show();
                                 //Toast.makeText(getApplicationContext(), "아이디가 너무 길거나 짧습니다", Toast.LENGTH_SHORT).show();
                                 //error_id.setText("이미 존재하는 아이디입니다");
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -182,7 +184,8 @@ public class RegisterActivity extends AppCompatActivity {
         et_pw_check.addTextChangedListener(new TextWatcher() {
             @SuppressLint("SetTextI18n")
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                /*if(!s.equals(input_pw)) {
+                String pw_check = et_pw_check.getText().toString();
+                if(s.equals(pw_check)) {
                     alert_pw_check.setText("비밀번호가 일치하지 않습니다");
                     alert_pw_check.setTextSize(12);
                     alert_pw_check.setTextColor(Color.RED);
@@ -190,7 +193,7 @@ public class RegisterActivity extends AppCompatActivity {
                 else {
                     alert_pw_check.setText("");
                     alert_pw_check.setTextSize(0);
-                }*/
+                }
             }
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
