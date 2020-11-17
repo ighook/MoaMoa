@@ -124,7 +124,7 @@ public class ReviewShow extends AppCompatActivity {
     private void SetImage() {
         if(image1 != null) {
             Glide.with(this).load(url + image1).into(image_view1);
-            image_view1.setBackgroundColor(getResources().getColor(R.color.colorGray));
+            //image_view1.setBackgroundColor(getResources().getColor(R.color.colorGray));
         }
 
         if(image2 != null) {
