@@ -60,6 +60,7 @@ public class RestaurantListActivity extends AppCompatActivity {
                 intent.putExtra("address", data.get("address"));
                 intent.putExtra("telephone", data.get("telephone"));
                 startActivity(intent);
+                finish();
             }
         });
         //Toast.makeText(RestaurantListActivity.this, "open", Toast.LENGTH_SHORT).show();

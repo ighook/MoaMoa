@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,7 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
     private EditText et_id, et_pw;
     public Button btn_login, btn_register;
+    String userID, userPW;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +49,8 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String userID = et_id.getText().toString();
-                String userPW = et_pw.getText().toString();
+                userID = et_id.getText().toString();
+                userPW = et_pw.getText().toString();
 
                 // 로그인을 눌렀을 때 아이디와 비밀번호 입력칸이 비어있는지 확인
                 if(userID.isEmpty() || userPW.isEmpty()) {
@@ -68,8 +70,16 @@ public class LoginActivity extends AppCompatActivity {
                             if(stats == 1) {
                                 Toast.makeText(getApplicationContext(), "로그인에 성공하였습니다", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                intent.putExtra("login", true);
-                                intent.putExtra("nicName", nicName);
+
+                                SharedPreferences sp=getSharedPreferences("Login", MODE_PRIVATE);
+                                SharedPreferences.Editor Ed=sp.edit();
+                                Ed.putString("ID", userID );
+                                Ed.putString("PW", userPW);
+                                Ed.putString("nicName", nicName);
+                                Ed.apply();
+
+                                Toast.makeText(LoginActivity.this, nicName + "님 환영합니다", Toast.LENGTH_SHORT).show();
+
                                 startActivity(intent);
                                 finish();
                             } else if(stats == 2) {

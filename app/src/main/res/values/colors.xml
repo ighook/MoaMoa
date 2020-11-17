@@ -28,4 +28,6 @@
     <color name="lbl_name">#333333</color>
     <color name="btn_logut_bg">#ff6861</color>
     <color name="btn_duplicate_check">#105575</color>
+
+    <color name="colorGray">#EDEDED</color>
 </resources>

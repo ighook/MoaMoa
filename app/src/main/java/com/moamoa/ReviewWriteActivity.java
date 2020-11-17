@@ -39,10 +39,12 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.moamoa.MainActivity.ID;
+
 public class ReviewWriteActivity extends AppCompatActivity {
 
     final int GET_GALLERY_IMAGE = 200;
-    String name, nicName;
+    String name, address, telephone, nicName;
     EditText et_content;
     ImageView img1, img2, img3, img4;
     Button btn_writing;
@@ -60,15 +62,11 @@ public class ReviewWriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_review_write);
 
         checkSelfPermission();
-        //tedPermission();
 
-        Intent intent = getIntent();
-        Bundle b = intent.getExtras();
-        if(b != null) {
-            name = (String) b.get("name");
-            nicName = (String) b.get("nicName");
-            if(nicName == null) nicName = "익명";
-        }
+        name = getIntent().getStringExtra("name");
+        address = getIntent().getStringExtra("address");
+        telephone = getIntent().getStringExtra("telephone");
+        //tedPermission();
 
         img1 = findViewById(R.id.img1);
         img2 = findViewById(R.id.img2);
@@ -84,6 +82,12 @@ public class ReviewWriteActivity extends AppCompatActivity {
         // 업로드 버튼
         uploadImage();
 
+        // 레이팅바 기본 값
+        r_eval1.setRating(1);
+        r_eval2.setRating(1);
+        r_eval3.setRating(1);
+        r_eval4.setRating(1);
+
         // 레이팅바 값을 가져옴
         getRating();
 
@@ -98,7 +102,8 @@ public class ReviewWriteActivity extends AppCompatActivity {
 
     public void Upload(int num) {
         String content = et_content.getText().toString();
-        String writer = nicName;
+        String writer = MainActivity.nicName;
+        //Log.d("nicName", MainActivity.nicName);
         String date = getDate();
 
         UploadToServer(num);
@@ -120,9 +125,12 @@ public class ReviewWriteActivity extends AppCompatActivity {
                     if(success) {
                         //clickUpload();
                         Toast.makeText(getApplicationContext(), "게시글을 성공적으로 저장하였습니다", Toast.LENGTH_SHORT).show();
-                        Log.d("상호명", name);
+                        /*Intent intent = new Intent(ReviewWriteActivity.this, RestaurantInfo.class);
+                        intent.putExtra("name", name);
+                        startActivity(intent);*/
+                        finish();
                     } else {
-                        //Toast.makeText(getApplicationContext(), "실패", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "게시글을 작성하는데 실패했습니다", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -133,6 +141,7 @@ public class ReviewWriteActivity extends AppCompatActivity {
         ReviewWriteRequest reviewWriteRequest = new ReviewWriteRequest(index, name, content, writer, date, eval1, eval2, eval3, eval4, image1, image2, image3, image4, responseListener);
         RequestQueue queue = Volley.newRequestQueue(ReviewWriteActivity.this);
         queue.add(reviewWriteRequest);
+
     }
 
     public void RegisterReview() {
@@ -176,7 +185,7 @@ public class ReviewWriteActivity extends AppCompatActivity {
         // 현재시간을 date 변수에 저장한다.
         Date date = new Date(now);
         // 시간을 나타냇 포맷을 정한다 ( yyyy/MM/dd 같은 형태로 변형 가능 )
-        SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         // nowDate 변수에 값을 저장한다.
         return sdfNow.format(date);
     }

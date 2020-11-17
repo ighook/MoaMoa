@@ -1,9 +1,12 @@
 package com.moamoa;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -12,6 +15,7 @@ import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -21,8 +25,16 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.error.AuthFailureError;
+import com.android.volley.error.VolleyError;
 import com.android.volley.misc.AsyncTask;
 import com.android.volley.request.JsonArrayRequest;
+import com.android.volley.request.JsonObjectRequest;
+import com.android.volley.request.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -40,6 +52,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class RestaurantInfo extends AppCompatActivity {
 
@@ -48,9 +61,10 @@ public class RestaurantInfo extends AppCompatActivity {
     LinearLayout btn_map_info, btn_menu, btn_review;
     ListView review_list;
     RelativeLayout review_screen;
+    String name;
     String myJSON;
     JSONArray review;
-    ArrayList<HashMap<String, String>> reviewList;
+    ArrayList<HashMap<String, String>> reviewList = new ArrayList<>();
 
     private static final String TAG_RESULTS="result";
     private static final String TAG_CONTENT="content";
@@ -60,9 +74,6 @@ public class RestaurantInfo extends AppCompatActivity {
     private static final String TAG_EVAL2="eval2";
     private static final String TAG_EVAL3="eval3";
     private static final String TAG_EVAL4="eval4";
-
-    // 가게 명
-    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +110,34 @@ public class RestaurantInfo extends AppCompatActivity {
 
         // 리뷰 레이아웃 비활성화
         review_screen.setVisibility(View.INVISIBLE);
+
+        // 리뷰 불러옴
+        GetReview();
+
+        // 리뷰 선택
+        review_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                HashMap<String, String> data = reviewList.get(position);
+                Intent intent = new Intent(RestaurantInfo.this, ReviewShow.class);
+                intent.putExtra("writer", data.get("writer"));
+                intent.putExtra("content", data.get("content"));
+                intent.putExtra("date", data.get("date"));
+                intent.putExtra("eval1", data.get("eval1"));
+                intent.putExtra("eval2", data.get("eval2"));
+                intent.putExtra("eval3", data.get("eval3"));
+                intent.putExtra("eval4", data.get("eval4"));
+                intent.putExtra("image1", data.get("image1"));
+                intent.putExtra("image2", data.get("image2"));
+                intent.putExtra("image3", data.get("image3"));
+                intent.putExtra("image4", data.get("image4"));
+                Log.d("image1", String.valueOf(data.get("image1")));
+                Log.d("image2", String.valueOf(data.get("image2")));
+                Log.d("image3", String.valueOf(data.get("image3")));
+                Log.d("image4", String.valueOf(data.get("image4")));
+                startActivity(intent);
+            }
+        });
 
         /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkPermission();
@@ -161,58 +200,78 @@ public class RestaurantInfo extends AppCompatActivity {
             review_bar.setBackgroundColor(Color.BLACK);
             //map_info.setVisibility(View.GONE);
             review_screen.setVisibility(View.VISIBLE);
-            GetReview("http://ighook.cafe24.com/moamoa/GetReview.php");
+
         }
     };
 
     private View.OnClickListener review_write_click = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(RestaurantInfo.this, ReviewWriteActivity.class);
-            intent.putExtra("name", name);
-            startActivity(intent);
+            if(MainActivity.LoginCheck()) {
+                Intent intent = new Intent(RestaurantInfo.this, ReviewWriteActivity.class);
+                intent.putExtra("name", name);
+                startActivity(intent);
+                //finish();
+            } else {
+                Toast.makeText(RestaurantInfo.this, "로그인이 필요합니다", Toast.LENGTH_SHORT).show();
+            }
         }
     };
 
-    private void GetReview(String url) {
-        class GetDataJSON extends AsyncTask<String, Void, String> {
+    public void GetReview() {
+        String url = "http://ighook.cafe24.com/moamoa/GetReview.php";
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
-            protected String doInBackground(String... params) {
-                String uri = params[0];
-                BufferedReader bufferedReader = null;
+            public void onResponse(String response) {
                 try {
-                    Log.d("GetReview", "try");
-                    URL url = new URL(uri);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // 연결 객체 생성
-                    StringBuilder sb = new StringBuilder();
+                    JSONArray jsonArray = new JSONArray(response);
+                    for(int i=0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String writer = jsonObject.getString("writer");
+                        String content = jsonObject.getString("content");
+                        String date = jsonObject.getString("date");
+                        String eval1 = jsonObject.getString("eval1");
+                        String eval2 = jsonObject.getString("eval2");
+                        String eval3 = jsonObject.getString("eval3");
+                        String eval4 = jsonObject.getString("eval4");
+                        String image1 = jsonObject.getString("image1");
+                        String image2 = jsonObject.getString("image2");
+                        String image3 = jsonObject.getString("image3");
+                        String image4 = jsonObject.getString("image4");
 
-                    if(conn != null){ // 연결되었으면
-                        conn.setConnectTimeout(10000);
-                        conn.setUseCaches(false);
-                        if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){ // 연결 코드가 리턴되면
-                            bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                            String json;
-                            while((json = bufferedReader.readLine())!= null){
-                                sb.append(json + "\n");
-                            }
-                        }
-                        Log.d("GetReview", "connected");
+                        HashMap<String,String> r = new HashMap<String,String>();
+                        r.put(TAG_WRITER, writer);
+                        r.put(TAG_CONTENT, content);
+                        r.put(TAG_DATE, date);
+                        r.put(TAG_EVAL1, eval1);
+                        r.put(TAG_EVAL2, eval2);
+                        r.put(TAG_EVAL3, eval3);
+                        r.put(TAG_EVAL4, eval4);
+                        r.put("image1", image1);
+                        r.put("image2", image2);
+                        r.put("image3", image3);
+                        r.put("image4", image4);
+                        reviewList.add(r);
                     }
-                    else {
-                        Log.d("GetReview", "not connected");
-                    }
-                    return sb.toString().trim();
-                } catch(Exception e){
-                    //Log.d("로그", "exception");
-                    return new String("GetReview" + e.getMessage());
+                    // 어댑터 생성, R.layout.list_item : Layout ID
+                    ListAdapter adapter = new SimpleAdapter(
+                            RestaurantInfo.this, reviewList, R.layout.review_list,
+                            new String[]{TAG_WRITER,TAG_CONTENT,TAG_DATE},
+                            new int[]{R.id.writer, R.id.content, R.id.date}
+                    );
+                    review_list.setAdapter(adapter); // ListView 에 어댑터 설정(연결)
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
-        }
-        GetDataJSON g = new GetDataJSON();
-        g.execute(url);
+
+        };
+        GetReviewRequest getReviewRequest = new GetReviewRequest(name, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(RestaurantInfo.this);
+        queue.add(getReviewRequest);
     }
 
-    protected void showList(){
+    /*protected void showList(){
         try {
             JSONObject jsonObj = new JSONObject(myJSON);
             review = jsonObj.getJSONArray(TAG_RESULTS);
@@ -245,7 +304,7 @@ public class RestaurantInfo extends AppCompatActivity {
             Log.d("showList", "exception");
             e.printStackTrace();
         }
-    }
+    }*/
 
     //@Override
     //public void onMapReady(GoogleMap googleMap) {

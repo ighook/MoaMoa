@@ -2,11 +2,14 @@ package com.moamoa;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -54,6 +57,21 @@ public class CafeListActivity extends AppCompatActivity {
         list = (ListView) findViewById(R.id.listView);
         cafeList = new ArrayList<HashMap<String,String>>();
         getDbData("http://ighook.cafe24.com/moamoa/GetCafeList.php");
+
+        // 리뷰 선택
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Toast.makeText(RestaurantListActivity.this, String.valueOf(restaurantList.get(position)), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(CafeListActivity.this, RestaurantInfo.class);
+                HashMap<String, String> data = cafeList.get(position);
+                intent.putExtra("name", data.get("name"));
+                intent.putExtra("address", data.get("address"));
+                intent.putExtra("telephone", data.get("telephone"));
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void getDbData(String url) {

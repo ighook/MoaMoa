@@ -1,5 +1,7 @@
 package com.moamoa;
 
+import android.util.Log;
+
 import com.android.volley.Response;
 import com.android.volley.error.AuthFailureError;
 import com.android.volley.request.StringRequest;
@@ -22,6 +24,7 @@ public class LoginRequest extends StringRequest {
 
     @Override
     protected Map<String, String> getParams() throws AuthFailureError {
+        Log.d("안내", "로그인 됨");
         return map;
     }
 }

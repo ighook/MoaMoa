@@ -2,24 +2,24 @@ package com.moamoa;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     ImageButton btn_login, btn_search, btn_restaurant, btn_cafe;
     TextView detail_text;
     boolean login;
-    String nicName;
+
+    static String ID = null;
+    static String PW = null;
+    static String nicName = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), nicName, Toast.LENGTH_SHORT).show();
             }
         }*/
+        GetUserInfo();
 
         //s
         detail_text = findViewById(R.id.detail);
@@ -46,8 +47,26 @@ public class MainActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
+                if(ID == null) {
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setMessage("로그아웃하시겠습니까?");
+                    builder.setPositiveButton("예",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Logout();
+                                }
+                            });
+                    builder.setNegativeButton("아니오",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+                    builder.show();
+                }
             }
         });
 
@@ -111,4 +130,25 @@ public class MainActivity extends AppCompatActivity {
     private static void openDrawer(DrawerLayout drawerLayout) {
         drawerLayout.openDrawer(GravityCompat.START);
     }*/
+
+    private void GetUserInfo() {
+        SharedPreferences sp1 = this.getSharedPreferences("Login",0);
+        ID = sp1.getString("ID", null);
+        PW = sp1.getString("PW", null);
+        nicName = sp1.getString("nicName", null);
+    }
+
+    public static boolean LoginCheck() {
+        return ID != null;
+    }
+
+    private void Logout() {
+        SharedPreferences sp1 = this.getSharedPreferences("Login",0);
+        SharedPreferences.Editor Ed = sp1.edit();
+        Ed.remove("Login");
+        Ed.apply();
+        ID = null;
+        PW = null;
+        nicName = null;
+    }
 }
