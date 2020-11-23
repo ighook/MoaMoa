@@ -28,21 +28,24 @@
             android:gravity="center_vertical"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/colorBlack"/>
-        <TextView
-            android:id="@+id/telephone"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:gravity="center_vertical"
-            android:textSize="10sp"
-            android:paddingBottom="2dip"
-            android:textColor="@color/colorBlack"/>
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/od_best_freind"/>
         <TextView
             android:id="@+id/address"
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:gravity="center_vertical"
+            android:textSize="10sp"
+            android:paddingBottom="2dip"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/nanum_gothic"/>
+        <TextView
+            android:id="@+id/telephone"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:gravity="center_vertical"
             android:textSize="12sp"
-            android:textColor="@color/colorBlack"/>
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/nanum_gothic"/>
     </LinearLayout>
 </LinearLayout>

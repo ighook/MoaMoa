@@ -25,7 +25,6 @@ public class NoticeActivity extends AppCompatActivity {
 
     TextView title_text, date_text, content_text;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +37,6 @@ public class NoticeActivity extends AppCompatActivity {
         String title = getIntent().getStringExtra("title");
         String content = getIntent().getStringExtra("content");
         String date = getIntent().getStringExtra("date");
-
-        Toast.makeText(this, date, Toast.LENGTH_SHORT).show();
 
         title_text.setText(title);
         content_text.setText(content);

@@ -4,15 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class MyAdapter extends BaseAdapter {
 
@@ -55,17 +54,18 @@ public class MyAdapter extends BaseAdapter {
         name = arrayList.get(position).getName();
         name_text.setText(name);
 
+        TextView address_text = (TextView)convertView.findViewById(R.id.address);
+        address = arrayList.get(position).getAddress();
+        address_text.setText(address);
+
         TextView telephone_text = (TextView)convertView.findViewById(R.id.telephone);
         telephone = arrayList.get(position).getTelephone();
+
         if(!telephone.equals("null")) {
             telephone_text.setText(telephone);
         } else {
             telephone_text.setText("");
         }
-
-        TextView address_text = (TextView)convertView.findViewById(R.id.address);
-        address = arrayList.get(position).getAddress();
-        address_text.setText(address);
 
         ImageView image_view = (ImageView)convertView.findViewById(R.id.imageView1);
 

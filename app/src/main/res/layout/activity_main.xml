@@ -88,9 +88,11 @@
         android:id="@+id/notice"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:layout_margin="10dp"
         android:padding="10dp"
         android:layout_above="@+id/board"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/main_board_border">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="20dp"
@@ -99,34 +101,191 @@
                 android:id="@+id/notice_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_toLeftOf="@id/detail"
+                android:layout_toLeftOf="@id/notice_detail"
                 android:text="◈ 공지사항"
                 android:textColor="@color/colorBlack"
-                android:layout_toStartOf="@id/detail" />
+                android:layout_toStartOf="@id/notice_detail"
+                android:fontFamily="@font/od_best_freind"/>
             <TextView
-                android:id="@+id/detail"
+                android:id="@+id/notice_detail"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:text="더보기"
-                android:textColor="@color/colorBlack"/>
+                android:gravity="center"
+                android:textSize="10sp"/>
         </RelativeLayout>
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginTop="5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp">
+                <TextView
+                    android:id="@+id/notice1_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorBlack"/>
+                <TextView
+                    android:id="@+id/notice1_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="2"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorBlack"/>
+                <TextView
+                    android:id="@+id/notice1_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="2"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorBlack"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp">
+                <TextView
+                    android:id="@+id/notice2_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorBlack"/>
+                <TextView
+                    android:id="@+id/notice2_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="2"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorBlack"/>
+                <TextView
+                    android:id="@+id/notice2_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="2"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorBlack"/>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/board"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_marginBottom="10dp"
+        android:layout_margin="10dp"
         android:padding="10dp"
+        android:layout_alignParentBottom="true"
         android:orientation="vertical"
-        android:layout_alignParentBottom="true">
-        <TextView
+        android:background="@drawable/main_board_border">
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:text="◈자유게시판"
-            android:textColor="@color/colorBlack"/>
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@id/board_detail"
+                android:text="◈ 자유게시판"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/od_best_freind"/>
+            <TextView
+                android:id="@+id/board_detail"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:text="더보기"
+                android:gravity="center"
+                android:textSize="10sp"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginTop="5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp">
+                <TextView
+                    android:id="@+id/board1_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorBlack"/>
+                <TextView
+                    android:id="@+id/board1_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="2"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorBlack"/>
+                <TextView
+                    android:id="@+id/board1_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="2"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorBlack"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp">
+                <TextView
+                    android:id="@+id/board2_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorBlack"/>
+                <TextView
+                    android:id="@+id/board2_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="2"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorBlack"/>
+                <TextView
+                    android:id="@+id/board2_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="2"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorBlack"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
     </LinearLayout>
 
 </RelativeLayout>

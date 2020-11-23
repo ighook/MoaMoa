@@ -4,16 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import com.android.volley.misc.AsyncTask;
 
@@ -22,16 +18,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class CafeListActivity extends AppCompatActivity {
 
@@ -63,13 +54,13 @@ public class CafeListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(RestaurantListActivity.this, String.valueOf(restaurantList.get(position)), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(CafeListActivity.this, RestaurantInfo.class);
+                Intent intent = new Intent(CafeListActivity.this, StoreInfo.class);
                 HashMap<String, String> data = cafeList.get(position);
                 intent.putExtra("name", data.get("name"));
                 intent.putExtra("address", data.get("address"));
                 intent.putExtra("telephone", data.get("telephone"));
+                intent.putExtra("info", data.get("info"));
                 startActivity(intent);
-                finish();
             }
         });
     }
@@ -130,6 +121,7 @@ public class CafeListActivity extends AppCompatActivity {
                 final String name = c.getString(TAG_NAME);
                 String telephone = c.getString(TAG_TELEPHONE);
                 String address = c.getString(TAG_ADDRESS);
+                String info = c.getString("info");
 
                 Log.d("showLost" + i, name);
                 Log.d("showLost" + i, telephone);
@@ -138,28 +130,17 @@ public class CafeListActivity extends AppCompatActivity {
                 HashMap<String,String> cafe = new HashMap<String,String>();
 
                 cafe.put(TAG_NAME, name);
-                cafe.put(TAG_TELEPHONE, telephone);
                 cafe.put(TAG_ADDRESS, address);
+                cafe.put(TAG_TELEPHONE, telephone);
+                cafe.put("info", info);
 
-                arrayList.add(new Store(name, telephone, address));
+                arrayList.add(new Store(name, address, telephone));
 
                 cafeList.add(cafe);
             }
 
             MyAdapter myAdapter = new MyAdapter(this, arrayList);
             list.setAdapter(myAdapter);
-            /*URL url = new URL("http://ighook.cafe24.com/ighook/www/moamoa/cafe_image/villain.jpg");
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, "src name");*/
-            // 어댑터 생성, R.layout.list_item : Layout ID
-            /*ListAdapter adapter = new SimpleAdapter(
-                CafeListActivity.this, cafeList, R.layout.item_list,
-                new String[]{TAG_NAME,TAG_TELEPHONE,TAG_ADDRESS},
-                new int[]{R.id.name, R.id.telephone, R.id.address}
-            );
-
-            list.setAdapter(adapter); // ListView 에 어댑터 설정(연결)
-            Log.d("showList", "어댑터 생성");*/
 
         } catch (JSONException e) {
             Log.d("showList", "exception");

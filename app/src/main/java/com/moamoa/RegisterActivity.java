@@ -60,18 +60,42 @@ public class RegisterActivity extends AppCompatActivity {
                 String userName = et_name.getText().toString();
                 String userNicName = et_nicName.getText().toString();
 
-                //Toast.makeText(getApplicationContext(), userID + " " + userPassword, Toast.LENGTH_SHORT).show();
+                if(userID.length() < 6 || userID.length() > 15) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                    builder.setMessage("아이디는 6~15 글자로 사용 가능합니다")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    builder.show();
+                    return;
+                }
+
+                if(userPassword.length() == 0 || userPasswordCheck.length() == 0) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                    builder.setMessage("비밀번호를 입력해주세요")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    builder.show();
+                    return;
+                }
+
                 if(!userPassword.equals(userPasswordCheck)) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                     builder.setMessage("비밀번호가 일치하지 않습니다")
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    //do things
+                                    dialog.cancel();
                                 }
                             });
-                    AlertDialog alert = builder.create();
-                    alert.show();
+                    builder.show();
                     return;
                 }
 
@@ -81,11 +105,10 @@ public class RegisterActivity extends AppCompatActivity {
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    //do things
+                                    dialog.cancel();
                                 }
                             });
-                    AlertDialog alert = builder.create();
-                    alert.show();
+                    builder.show();
                     return;
                 }
 
@@ -96,21 +119,8 @@ public class RegisterActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             int state = jsonObject.getInt("state");
 
-                            //String s = String.valueOf(state);
-                            //Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
-
                             if (state == 1) { // 회원 등록 성공
                                 Toast.makeText(getApplicationContext(), "가입이 완료되었습니다", Toast.LENGTH_SHORT).show();
-                                /*AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                                builder.setMessage("가입 성공")
-                                        .setCancelable(false)
-                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int id) {
-
-                                            }
-                                        });
-                                AlertDialog alert = builder.create();
-                                alert.show();*/
                                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 finish();
@@ -125,8 +135,6 @@ public class RegisterActivity extends AppCompatActivity {
                                         });
                                 AlertDialog alert = builder.create();
                                 alert.show();
-                                //Toast.makeText(getApplicationContext(), "이미 존재하는 아이디입니다", Toast.LENGTH_SHORT).show();
-                                //error_id.setText("이미 존재하는 아이디입니다");
                             } else if (state == 3) {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                                 builder.setMessage("아이디가 너무 길거나 짧습니다")
@@ -138,8 +146,6 @@ public class RegisterActivity extends AppCompatActivity {
                                         });
                                 AlertDialog alert = builder.create();
                                 alert.show();
-                                //Toast.makeText(getApplicationContext(), "아이디가 너무 길거나 짧습니다", Toast.LENGTH_SHORT).show();
-                                //error_id.setText("이미 존재하는 아이디입니다");
                             } else {
                                 Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
                             }
@@ -181,11 +187,11 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        et_pw_check.addTextChangedListener(new TextWatcher() {
-            @SuppressLint("SetTextI18n")
+        et_pw.addTextChangedListener(new TextWatcher() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String pw = s.toString();
                 String pw_check = et_pw_check.getText().toString();
-                if(s.equals(pw_check)) {
+                if(!pw.equals(pw_check)) {
                     alert_pw_check.setText("비밀번호가 일치하지 않습니다");
                     alert_pw_check.setTextSize(12);
                     alert_pw_check.setTextColor(Color.RED);
@@ -193,6 +199,45 @@ public class RegisterActivity extends AppCompatActivity {
                 else {
                     alert_pw_check.setText("");
                     alert_pw_check.setTextSize(0);
+                }
+            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        et_pw_check.addTextChangedListener(new TextWatcher() {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String pw = et_pw.getText().toString();
+                String pw_check = s.toString();
+                if(!pw_check.equals(pw)) {
+                    alert_pw_check.setText("비밀번호가 일치하지 않습니다");
+                    alert_pw_check.setTextSize(12);
+                    alert_pw_check.setTextColor(Color.RED);
+                }
+                else {
+                    alert_pw_check.setText("");
+                    alert_pw_check.setTextSize(0);
+                }
+            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        et_nicName.addTextChangedListener(new TextWatcher() {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String nicName = s.toString();
+                if(nicName.length() < 2) {
+                    alert_nicName.setText("닉네임은 두 글자부터 사용가능합니다");
+                    alert_nicName.setTextSize(12);
+                    alert_nicName.setTextColor(Color.RED);
+                }
+                else {
+                    alert_nicName.setText("");
+                    alert_nicName.setTextSize(0);
                 }
             }
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

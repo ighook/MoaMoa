@@ -1,31 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="30dp"
+    android:layout_height="32dp"
     android:layout_margin="10dp"
-    android:orientation="horizontal"
-    android:background="#D5D5D5">
+    android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/writer"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorBlack"/>
+        <TextView
+            android:id="@+id/writer"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/date"
+            android:gravity="center"
+            android:textSize="10sp"/>
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:textSize="10sp"/>
+    </RelativeLayout>
     <TextView
-        android:id="@+id/title"
-        android:layout_width="10dp"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/writer"
-        android:gravity="center_vertical"/>
-    <TextView
-        android:id="@+id/writer"
-        android:layout_width="60dp"
-        android:layout_height="match_parent"
-        android:layout_toLeftOf="@id/date"
-        android:gravity="center_vertical"/>
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="90dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:gravity="center_vertical"/>
-</RelativeLayout>
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGray"/>
+
+</LinearLayout>

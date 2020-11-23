@@ -7,28 +7,30 @@ import androidx.core.content.ContextCompat;
 import androidx.loader.content.CursorLoader;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.TextUtils;
-import android.util.Log;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.error.VolleyError;
-import com.android.volley.misc.AsyncTask;
-import com.android.volley.request.JsonObjectRequest;
 import com.android.volley.request.SimpleMultiPartRequest;
 import com.android.volley.request.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -39,20 +41,19 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.moamoa.MainActivity.ID;
-
 public class ReviewWriteActivity extends AppCompatActivity {
 
     final int GET_GALLERY_IMAGE = 200;
-    String name, address, telephone, nicName;
+    String name, address, telephone, nicName, index;
     EditText et_content;
     ImageView img1, img2, img3, img4;
     Button btn_writing;
     RatingBar r_eval1, r_eval2, r_eval3, r_eval4;
-    String eval1, eval2, eval3, eval4;
+    String eval1 = "1", eval2 = "1", eval3 = "1", eval4 = "1";
     String img1_path, img2_path, img3_path, img4_path;
     String img1_type, img2_type, img3_type, img4_type;
     String fileName1, fileName2, fileName3, fileName4;
+    TextView error_content;
 
     int selectedImageSlot = 0;
 
@@ -68,16 +69,17 @@ public class ReviewWriteActivity extends AppCompatActivity {
         telephone = getIntent().getStringExtra("telephone");
         //tedPermission();
 
-        img1 = findViewById(R.id.img1);
-        img2 = findViewById(R.id.img2);
-        img3 = findViewById(R.id.img3);
-        img4 = findViewById(R.id.img4);
+        img1 = findViewById(R.id.image1);
+        img2 = findViewById(R.id.image2);
+        img3 = findViewById(R.id.image3);
+        img4 = findViewById(R.id.image4);
         r_eval1 = findViewById(R.id.eval1);
         r_eval2 = findViewById(R.id.eval2);
         r_eval3 = findViewById(R.id.eval3);
         r_eval4 = findViewById(R.id.eval4);
         et_content = findViewById(R.id.et_content);
         btn_writing = findViewById(R.id.btn_writing);
+        error_content = findViewById(R.id.error_content);
 
         // 업로드 버튼
         uploadImage();
@@ -91,11 +93,39 @@ public class ReviewWriteActivity extends AppCompatActivity {
         // 레이팅바 값을 가져옴
         getRating();
 
+        // 내용 작성
+        textChanged();
+
         // 리뷰 저장
         btn_writing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RegisterReview();
+                if(et_content.getText().length() > 9) {
+                    RegisterReview();
+                }
+            }
+        });
+    }
+
+    public void textChanged() {
+        et_content.addTextChangedListener(new TextWatcher() {
+            @SuppressLint("SetTextI18n")
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (s.length() < 10) {
+                    error_content.setText("10자 이상 작성해주세요");
+                    error_content.setTextSize(12);
+                    error_content.setTextColor(Color.RED);
+                } else {
+                    error_content.setText("");
+                    error_content.setTextSize(0);
+                    error_content.setTextColor(Color.BLACK);
+                }
+            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void afterTextChanged(Editable s) {
             }
         });
     }
@@ -113,7 +143,7 @@ public class ReviewWriteActivity extends AppCompatActivity {
         String image3 = fileName3;
         String image4 = fileName4;
 
-        String index = String.valueOf(num);
+        index = String.valueOf(num);
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
@@ -125,9 +155,15 @@ public class ReviewWriteActivity extends AppCompatActivity {
                     if(success) {
                         //clickUpload();
                         Toast.makeText(getApplicationContext(), "게시글을 성공적으로 저장하였습니다", Toast.LENGTH_SHORT).show();
-                        /*Intent intent = new Intent(ReviewWriteActivity.this, RestaurantInfo.class);
+
+                        StoreInfo storeInfo = (StoreInfo) StoreInfo.activity;
+                        storeInfo.finish();
+
+                        Intent intent = new Intent(ReviewWriteActivity.this, StoreInfo.class);
                         intent.putExtra("name", name);
-                        startActivity(intent);*/
+                        intent.putExtra("address", address);
+                        startActivity(intent);
+
                         finish();
                     } else {
                         Toast.makeText(getApplicationContext(), "게시글을 작성하는데 실패했습니다", Toast.LENGTH_SHORT).show();
@@ -142,6 +178,7 @@ public class ReviewWriteActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(ReviewWriteActivity.this);
         queue.add(reviewWriteRequest);
 
+        //RestaurantInfo.GetReview();
     }
 
     public void RegisterReview() {
@@ -332,9 +369,6 @@ public class ReviewWriteActivity extends AppCompatActivity {
         cursor.moveToFirst();
         String result = cursor.getString(column_index);
         cursor.close();
-
-        //String type = result.split("\\.")[1];
-        //Toast.makeText(this, "이미지 타입 : " + type, Toast.LENGTH_SHORT).show();
 
         return result;
     }

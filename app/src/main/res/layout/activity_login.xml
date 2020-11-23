@@ -57,18 +57,18 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@drawable/btn_login"
+            android:background="@drawable/btn1"
             android:text="@string/btn_login"
-            android:textColor="@color/white" />
+            android:textColor="@color/colorBlack" />
 
         <Button
             android:id="@+id/btn_register"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/btn_login"
+            android:background="@drawable/btn1"
             android:text="@string/btn_register"
-            android:textColor="@color/white" />
+            android:textColor="@color/colorBlack" />
 
     </LinearLayout>
 </LinearLayout>

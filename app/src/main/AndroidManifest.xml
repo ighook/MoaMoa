@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="false"
@@ -17,14 +18,24 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="UnusedAttribute">
-        <activity android:name=".ShowImage"></activity>
+        <activity android:name=".BoardWriteActivity"></activity>
+        <activity android:name=".BoardListActivity" />
+        <activity android:name=".BoardActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBeBCfs8-ASc8_HBDGnIsb3iiYTjAjkyXE" />
+
+        <activity android:name=".menu_screen_sub" />
+        <activity android:name=".ShowImage" />
         <activity android:name=".NoticeActivity" />
         <activity android:name=".NoticeListActivity" />
-        <activity android:name=".RestaurantInfo" />
+        <activity android:name=".StoreInfo" />
         <activity android:name=".CafeListActivity" />
         <activity android:name=".RestaurantListActivity" />
         <activity android:name=".ReviewShow" />
         <activity android:name=".ReviewWriteActivity" />
+        <activity android:name=".ReviewEditActivity" />
         <activity android:name=".ReviewListActivity" />
         <activity android:name=".RegisterActivity" />
         <activity

@@ -20,7 +20,8 @@
             android:text="식당"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:textSize="24sp"/>
+            android:textSize="24sp"
+            android:fontFamily="@font/wiggle"/>
     </LinearLayout>
 
     <ListView

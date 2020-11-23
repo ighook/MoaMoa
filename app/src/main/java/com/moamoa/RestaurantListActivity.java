@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.android.volley.misc.AsyncTask;
 
@@ -54,13 +53,13 @@ public class RestaurantListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(RestaurantListActivity.this, String.valueOf(restaurantList.get(position)), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(RestaurantListActivity.this, RestaurantInfo.class);
+                Intent intent = new Intent(RestaurantListActivity.this, StoreInfo.class);
                 HashMap<String, String> data = restaurantList.get(position);
                 intent.putExtra("name", data.get("name"));
                 intent.putExtra("address", data.get("address"));
                 intent.putExtra("telephone", data.get("telephone"));
+                intent.putExtra("info", data.get("info"));
                 startActivity(intent);
-                finish();
             }
         });
         //Toast.makeText(RestaurantListActivity.this, "open", Toast.LENGTH_SHORT).show();
@@ -122,11 +121,17 @@ public class RestaurantListActivity extends AppCompatActivity {
                 String name = c.getString(TAG_NAME);
                 String telephone = c.getString(TAG_TELEPHONE);
                 String address = c.getString(TAG_ADDRESS);
+                String info = c.getString("info");
+
+                Log.d("showLost" + i, name);
+                Log.d("showLost" + i, telephone);
+                Log.d("showLost" + i, address);
 
                 HashMap<String,String> restaurant = new HashMap<String,String>();
                 restaurant.put(TAG_NAME, name);
                 restaurant.put(TAG_TELEPHONE, telephone);
                 restaurant.put(TAG_ADDRESS, address);
+                restaurant.put("info", info);
 
                 arrayList.add(new Store(name, telephone, address));
 

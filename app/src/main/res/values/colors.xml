@@ -28,6 +28,8 @@
     <color name="lbl_name">#333333</color>
     <color name="btn_logut_bg">#ff6861</color>
     <color name="btn_duplicate_check">#105575</color>
+    <color name="btn_review_write_stroke">#0038E4</color>
+    <color name="btn_review_write_stroke_pressed">#17DDFF</color>
 
     <color name="colorGray">#EDEDED</color>
 </resources>

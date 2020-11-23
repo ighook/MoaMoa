@@ -19,11 +19,20 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <TextView
+            android:id="@+id/writer_id"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:text="작성자 : "
+            android:textColor="@color/colorBlack"
+            android:gravity="center_vertical"/>
+        <TextView
             android:id="@+id/writer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_toRightOf="@id/writer_id"
             android:layout_toLeftOf="@id/date"
-            android:padding="10dp"
             android:textColor="@color/colorBlack"
             android:gravity="center_vertical"/>
         <TextView
@@ -36,15 +45,126 @@
             android:gravity="center_vertical"/>
     </RelativeLayout>
 
-
-    <TextView
-        android:id="@+id/content"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textSize="18sp"
-        android:textColor="@color/colorBlack"/>
-
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="맛"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/star"
+                android:scaleX="0.7"
+                android:scaleY="0.7"/>
+            <TextView
+                android:id="@+id/eval1"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="1.5"
+                android:textColor="@color/colorBlack"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="접근성"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/star"
+                android:scaleX="0.7"
+                android:scaleY="0.7"/>
+            <TextView
+                android:id="@+id/eval2"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="1.5"
+                android:textColor="@color/colorBlack"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="분위기"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/star"
+                android:scaleX="0.7"
+                android:scaleY="0.7"/>
+            <TextView
+                android:id="@+id/eval3"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="1.5"
+                android:textColor="@color/colorBlack"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="서비스"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/star"
+                android:scaleX="0.7"
+                android:scaleY="0.7"/>
+            <TextView
+                android:id="@+id/eval4"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="1.5"
+                android:textColor="@color/colorBlack"/>
+        </LinearLayout>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,7 +176,8 @@
             android:layout_weight="1"
             android:scaleType="centerCrop"
             android:layout_margin="5dp"
-            android:padding="3dp"/>
+            android:padding="3dp"
+            android:src="@drawable/camera"/>
         <com.moamoa.SquareImageView
             android:id="@+id/image2"
             android:layout_width="match_parent"
@@ -64,7 +185,8 @@
             android:layout_weight="1"
             android:scaleType="centerCrop"
             android:layout_margin="5dp"
-            android:padding="3dp"/>
+            android:padding="3dp"
+            android:src="@drawable/camera"/>
         <com.moamoa.SquareImageView
             android:id="@+id/image3"
             android:layout_width="match_parent"
@@ -72,7 +194,8 @@
             android:layout_weight="1"
             android:scaleType="centerCrop"
             android:layout_margin="5dp"
-            android:padding="3dp"/>
+            android:padding="3dp"
+            android:src="@drawable/camera"/>
         <com.moamoa.SquareImageView
             android:id="@+id/image4"
             android:layout_width="match_parent"
@@ -80,8 +203,40 @@
             android:layout_weight="1"
             android:scaleType="centerCrop"
             android:layout_margin="5dp"
-            android:padding="3dp"/>
+            android:padding="3dp"
+            android:src="@drawable/camera"/>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/colorBlack"/>
+
+    <LinearLayout
+        android:id="@+id/review_manage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:gravity="right"
+        android:padding="5dp">
+        <Button
+            android:id="@+id/btn_review_edit"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="수정"
+            android:background="@drawable/btn1"/>
+        <Button
+            android:id="@+id/btn_review_remove"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="삭제"
+            android:background="@drawable/btn1"/>
+    </LinearLayout>
+
 
 
 </LinearLayout>

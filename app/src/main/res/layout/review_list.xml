@@ -1,51 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-    <LinearLayout
+    android:layout_height="50dp"
+    android:layout_margin="6dp"
+    android:orientation="vertical"
+    android:gravity="center_vertical">
+    <TextView
+        android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="6dp"
-        android:orientation="vertical"
-        android:gravity="center_vertical">
-
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:textSize="14sp"
+        android:textColor="@color/colorBlack"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:orientation="horizontal">
         <TextView
-            android:id="@+id/content"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:paddingBottom="2dip"
-            android:gravity="center_vertical"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorBlack"/>
-        <RelativeLayout
+            android:id="@+id/writer"
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/writer"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:textSize="10sp"
-                android:layout_toLeftOf="@+id/date"
-                android:paddingBottom="2dip"
-                android:textColor="@color/colorBlack"/>
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:layout_alignParentRight="true"
-                android:textSize="10sp"
-                android:paddingBottom="2dip"
-                android:textColor="@color/colorBlack"/>
-        </RelativeLayout>
-
-    </LinearLayout>
+            android:gravity="center_vertical"
+            android:textSize="10sp"
+            android:layout_toLeftOf="@+id/date"
+            android:paddingBottom="2dip"
+            tools:ignore="RtlHardcoded,SmallSp" />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/star"
+            android:layout_toLeftOf="@id/eval"
+            android:scaleX="0.5"
+            android:scaleY="0.5"/>
+        <TextView
+            android:id="@+id/eval"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:gravity="center_vertical"
+            android:layout_toLeftOf="@id/date"
+            android:textSize="10sp"
+            android:paddingBottom="2dip"
+            android:textColor="@color/colorBlack"
+            tools:ignore="RtlHardcoded,SmallSp" />
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:textSize="10sp"
+            android:paddingBottom="2dip"
+            android:textColor="@color/colorBlack"
+            tools:ignore="RtlHardcoded,SmallSp" />
+    </RelativeLayout>
 </LinearLayout>
