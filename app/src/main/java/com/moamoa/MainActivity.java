@@ -23,6 +23,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
+
+    //zz
     ImageButton btn_login, btn_search, btn_restaurant, btn_cafe;
     TextView notice_detail_text, notice1_title, notice1_content, notice1_date, notice2_title, notice2_content, notice2_date;
     TextView board_detail_text, board1_title, board1_content ,board1_date, board2_title, board2_content ,board2_date;
