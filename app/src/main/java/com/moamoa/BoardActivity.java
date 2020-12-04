@@ -26,5 +26,7 @@ public class BoardActivity extends AppCompatActivity {
         title_text.setText(title);
         content_text.setText(content);
         date_text.setText(date);
+
+        //ㅋ
     }
 }
